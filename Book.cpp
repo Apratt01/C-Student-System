@@ -48,5 +48,5 @@ void Book::print()
   cout << this->getPrices()[0] << ',';
   cout << this->getPrices()[1] << ',';
   cout << this->getPrices()[2] << ',';
-  cout << this->bookTypeStrings[this->getBookType()] << '\n';
+  cout << bookTypeStrings[this->getBookType()] << '\n';
 }
