@@ -7,10 +7,10 @@ using std::string;
 using std::cout;
 using std::endl;
 
-class Student{
-  public:
+class Student {
+public:
     const static int daysInCourseArraySize = 3;
-  private:
+private:
     string studentID;
     string firstName;
     string lastName;
@@ -18,11 +18,11 @@ class Student{
     int age;
     int days[daysInCourseArraySize];
     DegreeProgram degreeProgram;
-  public:
+public:
     Student();
     Student(string studentID, string firstName, string lastName, string emailAddress, int age, int days[], DegreeProgram degreeProgram);
     ~Student();
-    
+
     string getID();
     string getFirstName();
     string getLastName();
@@ -30,7 +30,7 @@ class Student{
     int getAge();
     int* getDays();
     DegreeProgram getDegreeProgram();
-    
+
     void setID(string ID);
     void setFirstName(string fristName);
     void setLastName(string lastName);
@@ -38,9 +38,9 @@ class Student{
     void setAge();
     void setDays(int days[]);
     void setDegreeProgram(DegreeProgram st);
-    
+
     static void printHeader();
-    
+
     void print();
-    
+
 };
