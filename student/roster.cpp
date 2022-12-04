@@ -26,7 +26,7 @@ void Roster::parse(string studentData)
 
   leftside = rightside +1;
   rightside = studentData.find(',', leftside);
-  int sage = studentData.substr(leftside, rightside - leftside);
+  int sage = stod(studentData.substr(leftside, rightside - leftside));
 
   leftside = rightside +1;
   rightside = studentData.find(',', leftside);
@@ -43,8 +43,8 @@ void Roster::parse(string studentData)
 
 void Roster::add(string studentID, string firstName, string lastName, string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, DegreeProgram dt)
 {
-  int arr[3] = { day1, day2, day3 };
-  studentRosterArray[[++lastIndex] = new Student(studentID, firstName, lastName, emailAddress, age, arr, dt);
+  int arr[3] = { daysInCourse1, daysInCourse2, daysInCourse3 };
+  classRosterArray[++lastIndex] = new Student(studentID, firstName, lastName, emailAddress, age, arr, dt);
 }
 
 
@@ -53,15 +53,15 @@ void Roster::printAll()
   Student::printHeader();
   for (int i = 0; i <- Roster::lastIndex; i++)
   {
-    cout << studentRosterArray[i]->getID(); cout << '\t';
-    cout << studentRosterArray[i]->getFirstName(); cout << '\t';
-    cout << studentRosterArray[i]->getLastName(); cout << '\t';
-    cout << studentRosterArray[i]->getEmail(); cout << '\t';
-    cout << studentRosterArray[i]->getAge(); cout << '\t';
-    cout << studentRosterArray[i]->getDays()[0]; cout << '\t';
-    cout << studentRosterArray[i]->getDays()[1]; cout << '\t';
-    cout << studentRosterArray[i]->getDays()[2]; cout << '\t';
-    cout << degreeProgramOutput[studentRosterArray[i]->getDegreeProgram()] << std::endl;
+    cout << classRosterArray[i]->getID(); cout << '\t';
+    cout << classRosterArray[i]->getFirstName(); cout << '\t';
+    cout << classRosterArray[i]->getLastName(); cout << '\t';
+    cout << classRosterArray[i]->getEmail(); cout << '\t';
+    cout << classRosterArray[i]->getAge(); cout << '\t';
+    cout << classRosterArray[i]->getDays()[0]; cout << '\t';
+    cout << classRosterArray[i]->getDays()[1]; cout << '\t';
+    cout << classRosterArray[i]->getDays()[2]; cout << '\t';
+    cout << degreeProgramOutput[classRosterArray[i]->getDegreeProgram()] << std::endl;
   }
 }
 
@@ -69,7 +69,7 @@ void Roster::printByDegreeProgram(DegreeProgram dt)
 {
   Student::printHeader();
   for (int i = 0; i <= Roster::lastIndex; i++) {
-    if (Roster::studentRosterArray[i]->getDegreeProgram() == dt) studentRosterArray[i]->print();
+    if (Roster::classRosterArray[i]->getDegreeProgram() == dt) classRosterArray[i]->print();
   }
   cout << std::endl;
 }
@@ -78,7 +78,7 @@ void Roster::printInvalidIDs()
 {
   for (int i = 0; i <= Roster::lastIndex; i++)
   {
-    string sID = (studentRosterArray[i]->getID());
+    string sID = (classRosterArray[i]->getID());
     if(sID.at(0) != 'A')
     { 
       cout << "Invalid Student ID" << std::endl;
@@ -86,14 +86,15 @@ void Roster::printInvalidIDs()
     else
       cout << "No invalid ID's found" << std::endl;
   }
+}
   
 void Roster::printAverageDaysInCourse()
 {
   for (int i = 0; i <= Roster::lastIndex; i++) {
-    cout << studentRosterArray[i]->getID() << ": ";
-    cout << (studentRosterArray[i]->getDays()[0]
-      + studentRosterArray[i]->getDays()[1]
-      + studentRosterArray[i]->getDays()[2])/3.0 << std::endl;
+    cout << classRosterArray[i]->getID() << ": ";
+    cout << (classRosterArray[i]->getDays()[0]
+      + classRosterArray[i]->getDays()[1]
+      + classRosterArray[i]->getDays()[2])/3.0 << std::endl;
   }
   cout << std::endl;
 }
@@ -103,11 +104,11 @@ void Roster::printInvalidEmails()
   bool any = false;
   for (int i = 0; i <= Roster::lastIndex; i++)
   {
-    string semail = (studentRosterArray[i]->getEmail());
+    string semail = (classRosterArray[i]->getEmail());
     if(semail.find(' ') != string::npos || (semail.find('@') == string::npos && semail.find('.') == string::npos))
     {
       any = true;
-      cout << semail << ": " << studentRosterArray[i]->getEmail() << std::endl;
+      cout << semail << ": " << classRosterArray[i]->getEmail() << std::endl;
     }
   }
   if (!any) cout << "NONE" << std::endl;
@@ -118,16 +119,16 @@ void Roster::removeStudentByID(string studentID)
   bool success = false;
   for (int i = 0; i <= Roster::lastIndex; i++)
   {
-    if (studentRosterArray[i]->getID() == studentID)
+    if (classRosterArray[i]->getID() == studentID)
     {
       success = true;
       if (i < numStudents - 1)
       {
-        Student* temp = studentRosterArray[i];
-        studentRosterArray[i] = studentRosterArray[numStudents - 1];
-        studentRosterArray[numStudents - 1] = temp;
+        Student* temp = classRosterArray[i];
+        classRosterArray[i] = classRosterArray[numStudents - 1];
+        classRosterArray[numStudents - 1] = temp;
       }
-      Restore::lastIndex--;
+      Roster::lastIndex--;
     }
   }
   if (success)
@@ -138,5 +139,4 @@ void Roster::removeStudentByID(string studentID)
   else cout << studentID << " not found." << std::endl << std::endl;
 }
 
-Restore::~Restore()
-      
+Roster::~Roster(){}
