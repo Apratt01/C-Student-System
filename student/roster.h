@@ -4,7 +4,7 @@
 class Roster
 {
 private:
-    int lastIndex = -1;
+    //const static int lastIndex = -1;
     const static int numStudents = 5;
     Student* classRosterArray[numStudents];
 

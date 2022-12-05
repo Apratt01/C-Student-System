@@ -14,10 +14,19 @@ int main()
     const int numStudents = 5;
     Roster roster;
 
+    cout << "Course Title Scripting and Programming - Applications - C867, language used C++, Student ID 001449555, Student Name Aileen Pratt" << std::endl << std::endl;
+
     for (int i = 0; i < numStudents; i++) roster.parse(studentData[i]);
     cout << "Displaying all students: " << std::endl;
     roster.printAll();
     cout << std::endl;
+
+    cout << "Displaying invalid emails: " << std::endl;
+    roster.printInvalidEmails();
+    cout << std::endl;
+
+    cout << "Displaying average days in course: " << std::endl;
+    roster.printAverageDaysInCourse();
 
     for (int i = 0; i < 3; i++)
     {
@@ -25,19 +34,21 @@ int main()
         roster.printByDegreeProgram((DegreeProgram)i);
     }
 
+    cout << "Removing student with ID A3:" << std::endl;
+    roster.remove("A3");
+    cout << std::endl;
+
+    for (int i = 0; i < numStudents; i++) roster.parse(studentData[i]);
+    cout << "Displaying all students: " << std::endl;
+    roster.printAll();
+    cout << std::endl;
+
+    cout << "Removing student with ID A3:" << std::endl;
+    roster.remove("A3");
+    cout << std::endl;
+    
     cout << "Displaying students with invalid IDs: " << std::endl;
     roster.printInvalidIDs();
-    cout << std::endl;
-
-    cout << "Displaying average days in course: " << std::endl;
-    roster.printAverageDaysInCourse();
-
-    cout << "Displaying invalid emails: " << std::endl;
-    roster.printInvalidEmails();
-    cout << std::endl;
-
-    cout << "Removing student with ID A5:" << std::endl;
-    roster.remove("A5");
     cout << std::endl;
 
     system("pause");

@@ -1,5 +1,7 @@
 #include "roster.h"
 
+int lastIndex = -1;
+
 void Roster::parse(string studentData)
 {
     int rightside;
@@ -51,12 +53,12 @@ void Roster::add(string studentID, string firstName, string lastName, string ema
 void Roster::printAll()
 {
     Student::printHeader();
-    for (int i = 0; i < -Roster::lastIndex; i++)
+    for (int i = 0; i <-lastIndex; i++)
     {
         cout << classRosterArray[i]->getID(); cout << '\t';
         cout << classRosterArray[i]->getFirstName(); cout << '\t';
         cout << classRosterArray[i]->getLastName(); cout << '\t';
-        cout << classRosterArray[i]->getEmail(); cout << '\t';
+        //cout << classRosterArray[i]->getEmail(); cout << '\t';
         cout << classRosterArray[i]->getAge(); cout << '\t';
         cout << classRosterArray[i]->getDays()[0]; cout << '\t';
         cout << classRosterArray[i]->getDays()[1]; cout << '\t';
@@ -68,7 +70,7 @@ void Roster::printAll()
 void Roster::printByDegreeProgram(DegreeProgram degreeprogram)
 {
     Student::printHeader();
-    for (int i = 0; i <= Roster::lastIndex; i++) {
+    for (int i = 0; i <= lastIndex; i++) {
         if (Roster::classRosterArray[i]->getDegreeProgram() == degreeprogram) classRosterArray[i]->print();
     }
     cout << std::endl;
@@ -76,7 +78,7 @@ void Roster::printByDegreeProgram(DegreeProgram degreeprogram)
 
 void Roster::printInvalidIDs()
 {
-    for (int i = 0; i <= Roster::lastIndex; i++)
+    for (int i = 0; i <= lastIndex; i++)
     {
         string sID = (classRosterArray[i]->getID());
         if (sID.at(0) != 'A')
@@ -90,7 +92,7 @@ void Roster::printInvalidIDs()
 
 void Roster::printAverageDaysInCourse()
 {
-    for (int i = 0; i <= Roster::lastIndex; i++) {
+    for (int i = 0; i <= lastIndex; i++) {
         cout << classRosterArray[i]->getID() << ": ";
         cout << (classRosterArray[i]->getDays()[0]
             + classRosterArray[i]->getDays()[1]
@@ -102,7 +104,7 @@ void Roster::printAverageDaysInCourse()
 void Roster::printInvalidEmails()
 {
     bool any = false;
-    for (int i = 0; i <= Roster::lastIndex; i++)
+    for (int i = 0; i <= lastIndex; i++)
     {
         string semail = (classRosterArray[i]->getEmail());
         if (semail.find(' ') != string::npos || (semail.find('@') == string::npos && semail.find('.') == string::npos))
@@ -117,7 +119,7 @@ void Roster::printInvalidEmails()
 void Roster::remove(string studentID)
 {
     bool success = false;
-    for (int i = 0; i <= Roster::lastIndex; i++)
+    for (int i = 0; i <= lastIndex; i++)
     {
         if (classRosterArray[i]->getID() == studentID)
         {
@@ -128,7 +130,7 @@ void Roster::remove(string studentID)
                 classRosterArray[i] = classRosterArray[numStudents - 1];
                 classRosterArray[numStudents - 1] = temp;
             }
-            Roster::lastIndex--;
+            lastIndex--;
         }
     }
     if (success)
