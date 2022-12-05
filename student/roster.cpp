@@ -1,6 +1,10 @@
 #include "roster.h"
 
-int lastIndex = -1;
+// E. Create a Roster class (roster.cpp) by doing the following:
+// E1.  Create an array of pointers, classRosterArray, to hold the data provided in the “studentData Table.”
+// E2.  Create a student object for each student in the data table and populate classRosterArray.
+// E2a. Parse each set of data identified in the “studentData Table.”
+// E2b. Add each student object to classRosterArray.
 
 void Roster::parse(string studentData)
 {
@@ -9,7 +13,7 @@ void Roster::parse(string studentData)
 
     DegreeProgram degreeprogram = SOFTWARE;
     if (studentData.back() == 'K') degreeprogram = NETWORK;
-    else if (studentData.at(0) == 'Y') degreeprogram = SECURITY;
+    else if (studentData.back() == 'Y') degreeprogram = SECURITY;
 
     rightside = studentData.find(",");
     string sID = studentData.substr(0, rightside);
@@ -43,22 +47,33 @@ void Roster::parse(string studentData)
     add(sID, sfname, slname, semail, sage, sday1, sday2, sday3, degreeprogram);
 }
 
+// E3.  Define the following functions:
+// E3a. that sets the instance variables from part D1 and updates the roster.
+// E3b. that removes students from the roster by student ID. If the student ID does not exist, 
+//      the function prints an error message indicating that the student was not found.
+// E3c. that prints a complete tab-separated list of student data in the provided format:
+//      The printAll() function should loop through all the students in classRosterArray 
+//      and call the print() function for each student.
+// E3d. that correctly prints a student’s average number of days in the three courses.
+//      The student is identified by the studentID parameter.
+// E3e. that verifies student email addresses and displays all invalid email addresses to the user.
+//      Note: A valid email should include an at sign('@') and period('.') and should not include a space(' ').
+// E3f. that prints out student information for a degree program specified by an enumerated type.
+
 void Roster::add(string studentID, string firstName, string lastName, string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, DegreeProgram degreeprogram)
 {
     int arr[3] = { daysInCourse1, daysInCourse2, daysInCourse3 };
     classRosterArray[++lastIndex] = new Student(studentID, firstName, lastName, emailAddress, age, arr, degreeprogram);
 }
 
-
 void Roster::printAll()
 {
     Student::printHeader();
-    for (int i = 0; i <-lastIndex; i++)
+    for (int i = 0; i <=lastIndex; i++)
     {
         cout << classRosterArray[i]->getID(); cout << '\t';
         cout << classRosterArray[i]->getFirstName(); cout << '\t';
         cout << classRosterArray[i]->getLastName(); cout << '\t';
-        //cout << classRosterArray[i]->getEmail(); cout << '\t';
         cout << classRosterArray[i]->getAge(); cout << '\t';
         cout << classRosterArray[i]->getDays()[0]; cout << '\t';
         cout << classRosterArray[i]->getDays()[1]; cout << '\t';
@@ -90,13 +105,33 @@ void Roster::printInvalidIDs()
     }
 }
 
-void Roster::printAverageDaysInCourse()
+int Roster::getLastStudentIndex()
 {
-    for (int i = 0; i <= lastIndex; i++) {
-        cout << classRosterArray[i]->getID() << ": ";
-        cout << (classRosterArray[i]->getDays()[0]
-            + classRosterArray[i]->getDays()[1]
-            + classRosterArray[i]->getDays()[2]) / 3.0 << std::endl;
+    return lastIndex;
+}
+
+Student* Roster::getStudent(int idx)
+{
+    return classRosterArray[idx];
+}
+
+void Roster::printAverageDaysInCourse(string studentID)
+{
+    int studentIndex = -1;
+    for (int i = 0; i <= Roster::lastIndex; ++i)
+    {
+        if (classRosterArray[i]->getID() == studentID)
+        {
+            studentIndex = i;
+            break;
+        }
+    }
+    if (studentIndex >= 0)
+    { 
+        cout << classRosterArray[studentIndex]->getID() << ": ";
+        cout << (classRosterArray[studentIndex]->getDays()[0]
+            + classRosterArray[studentIndex]->getDays()[1]
+            + classRosterArray[studentIndex]->getDays()[2]) / 3.0;
     }
     cout << std::endl;
 }
@@ -139,6 +174,16 @@ void Roster::remove(string studentID)
         this->printAll();
     }
     else cout << studentID << " not found." << std::endl << std::endl;
+}
+
+// F5.  Implement the destructor to release the memory that was allocated dynamically in Roster.
+
+Roster::~Roster()
+{
+    for (int i = 0; i < numStudents; ++i)
+    {
+        delete classRosterArray[i];
+    }
 }
 
 Roster::~Roster() {}

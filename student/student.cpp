@@ -1,5 +1,8 @@
 #include "student.h"
 
+// D 1. Create the class Student  in the files student.h and student.cpp, which includes each of the following variables:
+// student ID, first name, last name, email address, age, array of number of days to complete each course, degree program
+
 Student::Student()
 {
 	this->studentID = "";
@@ -23,6 +26,14 @@ Student::Student(string studentID, string firstName, string lastName, string ema
 }
 
 Student::~Student() {}
+
+// D 2. Create each of the following functions in the Student class: 
+// D 2a. an accessor (i.e., getter) for each instance variable from part D1
+// D 2b. a mutator (i.e., setter) for each instance variable from part D1
+// D 2c. All external access and changes to any instance variables of the Student 
+//       class must be done using accessor and mutator functions.
+// D 2d. constructor using all of the input parameters provided in the table
+// D 2e. print() to print specific student data
 
 string Student::getID() { return this->studentID; }
 string Student::getFirstName() { return this->firstName; }
@@ -54,7 +65,6 @@ void Student::print()
 	cout << "First Name: " << this->getFirstName() << '\t';
 	cout << "Last Name: " << this->getLastName() << '\t';
 	cout << "Age: " << this->getAge() << '\t';
-	//cout << this->getEmail() << '\t';
 	cout << "daysInCourse: {" << this->getDays()[0] << ',' << " ";
 	cout << this->getDays()[1] << ',' << " ";
 	cout << this->getDays()[2] << '}' << '\t';
