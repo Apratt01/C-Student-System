@@ -36,13 +36,13 @@ void Roster::parse(string studentData)
 
     leftside = rightside + 1;
     rightside = studentData.find(',', leftside);
-    int sday1 = stod(studentData.substr(leftside, rightside - leftside));
+    int sday1 = stoi(studentData.substr(leftside, rightside - leftside));
     leftside = rightside + 1;
     rightside = studentData.find(',', leftside);
-    int sday2 = stod(studentData.substr(leftside, rightside - leftside));
+    int sday2 = stoi(studentData.substr(leftside, rightside - leftside));
     leftside = rightside + 1;
     rightside = studentData.find(',', leftside);
-    int sday3 = stod(studentData.substr(leftside, rightside - leftside));
+    int sday3 = stoi(studentData.substr(leftside, rightside - leftside));
 
     add(sID, sfname, slname, semail, sage, sday1, sday2, sday3, degreeprogram);
 }
@@ -71,16 +71,11 @@ void Roster::printAll()
     Student::printHeader();
     for (int i = 0; i <=lastIndex; i++)
     {
-        cout << classRosterArray[i]->getID(); cout << '\t';
-        cout << classRosterArray[i]->getFirstName(); cout << '\t';
-        cout << classRosterArray[i]->getLastName(); cout << '\t';
-        cout << classRosterArray[i]->getAge(); cout << '\t';
-        cout << classRosterArray[i]->getDays()[0]; cout << '\t';
-        cout << classRosterArray[i]->getDays()[1]; cout << '\t';
-        cout << classRosterArray[i]->getDays()[2]; cout << '\t';
-        cout << degreeProgramOutput[classRosterArray[i]->getDegreeProgram()] << std::endl;
+        classRosterArray[i]->print();
     }
 }
+
+
 
 void Roster::printByDegreeProgram(DegreeProgram degreeprogram)
 {
@@ -145,7 +140,7 @@ void Roster::printInvalidEmails()
         if (semail.find(' ') != string::npos || (semail.find('@') == string::npos && semail.find('.') == string::npos))
         {
             any = true;
-            cout << semail << ": " << classRosterArray[i]->getEmail() << std::endl;
+            cout << semail << std::endl;
         }
     }
     if (!any) cout << "NONE" << std::endl;
@@ -185,5 +180,3 @@ Roster::~Roster()
         delete classRosterArray[i];
     }
 }
-
-Roster::~Roster() {}

@@ -56,7 +56,7 @@ void Student::setDegreeProgram(DegreeProgram degreeprogram) { this->degreeProgra
 
 void Student::printHeader()
 {
-	cout << "Output format: ID | First Name | Last Name | Age | Days In Course | Degree Program\n";
+	cout << "Output format: ID | First Name | Last Name | Age | Days In Course | Degree Program" << std::endl;
 }
 
 void Student::print()
@@ -68,5 +68,5 @@ void Student::print()
 	cout << "daysInCourse: {" << this->getDays()[0] << ',' << " ";
 	cout << this->getDays()[1] << ',' << " ";
 	cout << this->getDays()[2] << '}' << '\t';
-	cout << "Degree Program: " << degreeProgramOutput[this->getDegreeProgram()] << '\n';
+	cout << "Degree Program: " << degreeProgramOutput[this->getDegreeProgram()] << std::endl;
 }

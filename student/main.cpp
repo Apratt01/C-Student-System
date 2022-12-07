@@ -60,7 +60,7 @@ int main()
     {
         if (i == SOFTWARE)
         {
-            cout << "Displyaing by degree type: " << degreeProgramOutput[i] << std::endl;
+            cout << "Displaying by degree type: " << degreeProgramOutput[i] << std::endl;
             classRoster.printByDegreeProgram((DegreeProgram)i);
         }
     }
@@ -88,4 +88,4 @@ int main()
 
     system("pause");
     return 0;
-}
+};

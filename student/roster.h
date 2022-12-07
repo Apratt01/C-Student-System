@@ -48,4 +48,3 @@ public:
     Student* getStudent(int idx);
     ~Roster();
 };
-};
